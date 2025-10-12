@@ -1,17 +1,31 @@
-
 <html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title data-lang-key="meta_title">BEST WORK - 외국인 유학생 및 취업 컨설팅</title>
-    <!-- Font Awesome for Social Media Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Variables */
         :root { --accent: #0b76ef; --muted: #555; --bg-light: #f9f9f9; }
         /* Reset and Base Styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { height: 100%; overflow-x: hidden; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif; color: #222; }
+        body, html { 
+            height: 100%; 
+            overflow-x: hidden; /* 가로 스크롤 방지 */
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif; 
+            color: #222; 
+        }
+
+        /* ------------------------------------------------ */
+        /* [개선 3: 전역 콘텐츠 최대 너비 제한] */
+        /* 이미지, 비디오 등이 뷰포트를 초과하는 것을 방지하여 가로 스크롤 문제 해결 */
+        img, video, iframe {
+            max-width: 100%;
+            height: auto;
+            display: block; 
+        }
+        /* ------------------------------------------------ */
+
 
         /* Navigation Bar */
         .navbar {
@@ -210,29 +224,44 @@
             .logo { font-size: 42px !important; }
             header h1 { font-size: 28px; }
             
-            /* * CRITICAL FIX: The previous 'display: none' rule for .navbar-links 
-            * in this media query was causing the links to disappear on mobile.
-            * We remove that rule to keep the links visible. 
-            * The .navbar-links is already set to 'display: flex' above.
-            */
-
             .navbar { padding: 10px 20px; }
+            
+            /* ------------------------------------------------ */
+            /* [개선 1: 네비게이션 겹침 방지] */
+            .navbar-links a { 
+                margin-left: 10px; 
+                font-size: 13px; 
+            }
+            .lang-switcher {
+                margin-left: 10px; 
+            }
+            /* ------------------------------------------------ */
+
             .card-grid { grid-template-columns: 1fr; }
             
             /* Adjust spacing for the language switcher when space is tighter */
-            .lang-switcher {
-                margin-left: 15px; 
+            /* .lang-switcher { margin-left: 15px; } -> 10px로 위에서 조정 */
+
+            /* ------------------------------------------------ */
+            /* [개선 2: 회사 소개 섹션 (About) 모바일 레이아웃] */
+            #about .container > div {
+                flex-direction: column; /* 세로 방향으로 정렬 */
+                padding: 0; 
             }
+            #about .text-content {
+                /* 인라인 스타일을 오버라이드하여 좌측 패딩 제거 및 중앙 정렬 */
+                padding: 20px 0 0 0 !important; 
+                text-align: center !important; 
+            }
+            /* ------------------------------------------------ */
         }
     </style>
 </head>
 <body data-lang="ko">
     
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <a href="#home" class="navbar-brand">BEST WORK</a>
         
-        <!-- Navbar Right Group: Contains links and language switcher -->
         <div class="navbar-right-group">
             <div class="navbar-links">
                 <a href="#about" data-lang-key="nav_about">회사 소개</a>
@@ -242,7 +271,6 @@
                 <a href="#contact" data-lang-key="nav_contact">문의하기</a>
             </div>
 
-            <!-- Language Switcher -->
             <div class="lang-switcher">
                 <button class="lang-btn active" data-lang-code="ko">KO</button>
                 <button class="lang-btn" data-lang-code="en">EN</button>
@@ -250,7 +278,6 @@
         </div>
     </nav>
 
-    <!-- 1. Home Section (Header) -->
     <header id="home">
         <div class="overlay">
             <div class="logo">BEST WORK</div>
@@ -260,20 +287,17 @@
         </div>
     </header>
 
-    <!-- 2. About Section -->
     <section id="about" style="padding: 100px 20px 80px 20px;">
         <div class="container">
             <h2 data-lang-key="about_title">회사 소개</h2>
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px;">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px;"> 
 
-                <!-- Image Column -->
                 <div style="flex: 1 1 45%; max-width: 500px; min-width: 300px;">
                     <img src="https://github.com/BEST-WORK/BESTWORK/blob/main/Resized_20250308_150855_1741415133899.JPG?raw=true" 
                          alt="BEST WORK Executive Meeting" 
                          style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); object-fit: cover;">
                 </div>
                 
-                <!-- Text Content Column -->
                 <div class="text-content" style="flex: 1 1 50%; max-width: 600px; padding: 0 0 0 40px; text-align: left;">
                     <h3 data-lang-key="about_subtitle" style="font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 15px;">글로벌 인재와 한국을 잇는 가장 신뢰받는 가교</h3>
                     
@@ -287,28 +311,24 @@
         </div>
     </section>
 
-    <!-- 3. Services Section -->
     <section id="services">
         <div class="container">
             <h2 data-lang-key="services_title">주요 서비스</h2>
             <p class="muted" data-lang-key="services_desc" style="max-width: 800px; margin: 0 auto 30px;">BEST WORK가 제공하는 핵심 솔루션을 확인하세요. 유학 컨설팅부터 비자 프로그램, 취업 연계까지 맞춤형 서비스를 제공합니다.</p>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 40px; text-align: center;">
                 
-                <!-- Service Item 1: Customized Study Abroad Consulting -->
                 <div style="width: 300px; padding: 20px;">
                     <div style="font-size: 40px; color: #fff; margin-bottom: 15px;">🎓</div>
                     <h3 data-lang-key="service1_title" style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #fff;">맞춤형 유학 컨설팅</h3>
                     <p data-lang-key="service1_desc" style="font-size: 16px; color: #e0e0e0; line-height: 1.6;">개인의 학업 목표와 적성에 맞춘 최적의 한국 대학 및 전공을 추천하며, 입학 절차 전반에 걸친 밀착 지원을 제공합니다.</p>
                 </div>
                 
-                <!-- Service Item 2: Life Cycle Visa Management -->
                 <div style="width: 300px; padding: 20px;">
                     <div style="font-size: 40px; color: #fff; margin-bottom: 15px;">🛂</div>
                     <h3 data-lang-key="service2_title" style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #fff;">생애주기 비자 관리</h3>
                     <p data-lang-key="service2_desc" style="font-size: 16px; color: #e0e0e0; line-height: 1.6;">D-2(유학) 비자부터 E-7(전문직) 비자, 영주권까지, 한국 정착에 필요한 비자 전환에 대한 체계적인 로드맵과 준비 지원을 제공합니다.</p>
                 </div>
                 
-                <!-- Service Item 3: Local Industry Talent Connection -->
                 <div style="width: 300px; padding: 20px;">
                     <div style="font-size: 40px; color: #fff; margin-bottom: 15px;">💼</div>
                     <h3 data-lang-key="service3_title" style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #fff;">국내 산업 인재 연계</h3>
@@ -318,13 +338,11 @@
         </div>
     </section>
 
-    <!-- 4. Universities Section -->
     <section id="universities">
         <div class="container">
             <h2 data-lang-key="uni_title">제휴 대학교</h2>
             <p class="muted" data-lang-key="uni_desc" style="max-width: 800px; margin: 0 auto 40px;">BEST WORK가 파트너십을 맺은 국내 유수 대학들로, 외국인 유학생에게 최적의 학업 환경을 제공합니다.</p>
             
-            <!-- University Image Slider -->
             <div class="slider-container">
                 <div class="slider-wrapper" id="university-slider-wrapper">
                     <div class="slide">
@@ -375,37 +393,31 @@
         </div>
     </section>
 
-    <!-- 5. Countries Section -->
     <section id="countries" style="background: var(--bg-light);">
         <div class="container">
             <h2 data-lang-key="country_title">주요 국가</h2> 
             <p class="muted" data-lang-key="country_desc" style="max-width: 800px; margin: 0 auto 40px;">BEST WORK는 현지 네트워크를 기반으로 다음과 같은 주요 국가에서 한국 유학 및 취업을 희망하는 우수 인재를 체계적으로 발굴하고 지원합니다.</p>
             <div class="card-grid">
-                <!-- Nepal -->
                 <div class="country-card card-nepal">
                     <span class="flag">🇳🇵</span>
                     <h3 data-lang-key="country1_title">네팔</h3>
                     <p data-lang-key="country1_desc">높은 학구열과 성실함을 자랑하는 인재의 보고입니다. 한국과의 근로자 및 유학생 교류가 오래전부터 활발했으며, 농업 및 제조업 분야에서 한국 경제에 기여하고 있습니다.</p>
                 </div>
-                <!-- Bangladesh -->
                 <div class="country-card card-bangladesh">
                     <span class="flag">🇧🇩</span>
                     <h3 data-lang-key="country2_title">방글라데시</h3>
                     <p data-lang-key="country2_desc">젊고 역동적인 인구가 풍부한 활기찬 시장입니다. 한국과의 경제 협력이 확대되고 있으며, 특히 섬유 및 제조업 분야에서 유학 후 취업을 희망하는 인재가 늘고 있습니다.</p>
                 </div>
-                <!-- Myanmar -->
                 <div class="country-card card-myanmar">
                     <span class="flag">🇲🇲</span>
                     <h3 data-lang-key="country3_title">미얀마</h3>
                     <p data-lang-key="country3_desc">풍부한 자원과 경제 발전 잠재력을 가진 동남아시아의 전략적 거점입니다. 한국 유학에 대한 관심이 급증하고 있으며, 한국 정착을 희망하는 우수 인재를 발굴합니다.</p>
                 </div>
-                <!-- Sri Lanka -->
                 <div class="country-card card-srilanka">
                     <span class="flag">🇱🇰</span>
                     <h3 data-lang-key="country4_title">스리랑카</h3>
                     <p data-lang-key="country4_desc">높은 문해율과 교육 수준을 자랑하는 인도양의 섬나라입니다. IT 및 공학 등 전문 분야에서 한국 대학 및 기업을 목표로 하는 인재들이 많습니다.</p>
                 </div>
-                <!-- Vietnam -->
                 <div class="country-card card-vietnam">
                     <span class="flag">🇻🇳</span>
                     <h3 data-lang-key="country5_title">베트남</h3>
@@ -415,7 +427,6 @@
         </div>
     </section>
 
-    <!-- 6. Contact Section -->
     <section id="contact">
         <div class="container">
             <h2 data-lang-key="contact_title">문의하기</h2>
@@ -424,25 +435,20 @@
             <div style="display: flex; justify-content: center;">
                 <div id="contact-form-container" style="max-width: 500px; width: 100%; padding: 30px; background: var(--bg-light); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <form id="contact-form" onsubmit="handleFormSubmit(event)">
-                        <!-- Name -->
                         <label for="name" data-lang-key="form_name_label">이름</label>
                         <input type="text" id="name" name="name" required data-lang-key="form_name_placeholder" data-lang-attr="placeholder" placeholder="성함 또는 회사명">
 
-                        <!-- Email Address -->
                         <label for="email" data-lang-key="form_email_label">이메일 주소</label>
                         <input type="email" id="email" name="email" required data-lang-key="form_email_placeholder" data-lang-attr="placeholder" placeholder="example@email.com">
 
-                        <!-- Message Content -->
                         <label for="message" data-lang-key="form_message_label">문의 내용</label>
                         <textarea id="message" name="message" required data-lang-key="form_message_placeholder" data-lang-attr="placeholder" placeholder="문의 내용을 상세하게 작성해 주세요. (예: [회사/대학명] 제휴 문의)"></textarea>
 
                         <button type="submit" data-lang-key="form_submit_btn">문의 접수</button>
                     </form>
                     
-                    <!-- Submission message -->
                     <div id="submit-message" style="display:none; margin-top: 20px; padding: 15px; border-radius: 8px; background: #e6f3ff; color: var(--accent); font-weight: 700;"></div>
 
-                    <!-- Email Info -->
                     <div id="email-info" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px;">
                         <div data-lang-key="contact_email_direct" style="font-size: 16px; font-weight: 600; color: #222; margin-bottom: 5px;">* 이메일 직접 문의</div>
                         <a href="mailto:koreabestwork@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 18px; font-weight: 700;">koreabestwork@gmail.com</a>
@@ -450,7 +456,6 @@
                 </div>
             </div>
 
-            <!-- Social Media Links -->
             <div class="social-links">
                 <a href="https://www.instagram.com/best_work_korea/" target="_blank" aria-label="BEST WORK Instagram">
                     <i class="fab fa-instagram"></i>
@@ -464,7 +469,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div style="font-weight:800;font-size:18px">BEST WORK</div>
