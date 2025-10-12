@@ -11,21 +11,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html { 
             height: 100%; 
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden; 
             font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif; 
             color: #222; 
         }
 
-        /* ------------------------------------------------ */
-        /* [개선 3: 전역 콘텐츠 최대 너비 제한] */
-        /* 이미지, 비디오 등이 뷰포트를 초과하는 것을 방지하여 가로 스크롤 문제 해결 */
+        /* [전역 콘텐츠 최대 너비 제한] */
         img, video, iframe {
             max-width: 100%;
             height: auto;
             display: block; 
         }
-        /* ------------------------------------------------ */
-
 
         /* Navigation Bar */
         .navbar {
@@ -51,14 +47,15 @@
         }
         .navbar-brand:hover { color: var(--accent); }
         
-        /* Container to group links and language switcher */
         .navbar-right-group {
             display: flex;
             align-items: center;
+            /* 모바일에서 공간 부족 시 유연하게 축소 허용 */
+            flex-shrink: 1; 
+            min-width: 0; 
         }
         
         .navbar-links {
-            /* Ensure links use flex layout consistently */
             display: flex; 
             align-items: center;
         }
@@ -69,7 +66,6 @@
             margin-left: 25px;
             font-weight: 600;
             transition: color 0.3s;
-            /* Allow text to wrap if necessary on very small screens */
             white-space: nowrap; 
         }
         .navbar-links a:hover { color: var(--accent); }
@@ -82,7 +78,6 @@
             border: 1px solid #ffffff60;
             border-radius: 6px;
             overflow: hidden;
-            /* Ensure lang switcher stays visible */
             white-space: nowrap; 
         }
         .lang-btn {
@@ -227,33 +222,32 @@
             .navbar { padding: 10px 20px; }
             
             /* ------------------------------------------------ */
-            /* [개선 1: 네비게이션 겹침 방지] */
+            /* [네비게이션바 문제 해결] */
+            /* 폰트 및 마진을 최대한 줄여 언어 버튼 잘림 방지 */
             .navbar-links a { 
-                margin-left: 10px; 
+                margin-left: 5px; 
                 font-size: 13px; 
             }
             .lang-switcher {
-                margin-left: 10px; 
+                margin-left: 5px; 
+            }
+            .lang-btn {
+                padding: 5px 6px; 
+                font-size: 12px;
             }
             /* ------------------------------------------------ */
 
             .card-grid { grid-template-columns: 1fr; }
             
-            /* Adjust spacing for the language switcher when space is tighter */
-            /* .lang-switcher { margin-left: 15px; } -> 10px로 위에서 조정 */
-
-            /* ------------------------------------------------ */
-            /* [개선 2: 회사 소개 섹션 (About) 모바일 레이아웃] */
+            /* [회사 소개 섹션 (About) 모바일 레이아웃] */
             #about .container > div {
-                flex-direction: column; /* 세로 방향으로 정렬 */
+                flex-direction: column; 
                 padding: 0; 
             }
             #about .text-content {
-                /* 인라인 스타일을 오버라이드하여 좌측 패딩 제거 및 중앙 정렬 */
                 padding: 20px 0 0 0 !important; 
                 text-align: center !important; 
             }
-            /* ------------------------------------------------ */
         }
     </style>
 </head>
@@ -432,30 +426,27 @@
             <h2 data-lang-key="contact_title">문의하기</h2>
             <p class="muted" data-lang-key="contact_desc" style="max-width: 600px; margin: 0 auto 40px;">BEST WORK와 함께 한국에서의 성공적인 유학 및 정착 여정을 시작하세요. 아래 양식을 작성해 주시면 전문 컨설턴트가 신속하게 답변드리겠습니다.</p>
             
-            <div style="display: flex; justify-content: center;">
-                <div id="contact-form-container" style="max-width: 500px; width: 100%; padding: 30px; background: var(--bg-light); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <form id="contact-form" onsubmit="handleFormSubmit(event)">
-                        <label for="name" data-lang-key="form_name_label">이름</label>
-                        <input type="text" id="name" name="name" required data-lang-key="form_name_placeholder" data-lang-attr="placeholder" placeholder="성함 또는 회사명">
+            <div id="contact-form-container" style="max-width: 500px; width: 100%; padding: 30px; background: var(--bg-light); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto;">
+                <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                    <label for="name" data-lang-key="form_name_label">이름</label>
+                    <input type="text" id="name" name="name" required data-lang-key="form_name_placeholder" data-lang-attr="placeholder" placeholder="성함 또는 회사명">
 
-                        <label for="email" data-lang-key="form_email_label">이메일 주소</label>
-                        <input type="email" id="email" name="email" required data-lang-key="form_email_placeholder" data-lang-attr="placeholder" placeholder="example@email.com">
+                    <label for="email" data-lang-key="form_email_label">이메일 주소</label>
+                    <input type="email" id="email" name="email" required data-lang-key="form_email_placeholder" data-lang-attr="placeholder" placeholder="example@email.com">
 
-                        <label for="message" data-lang-key="form_message_label">문의 내용</label>
-                        <textarea id="message" name="message" required data-lang-key="form_message_placeholder" data-lang-attr="placeholder" placeholder="문의 내용을 상세하게 작성해 주세요. (예: [회사/대학명] 제휴 문의)"></textarea>
+                    <label for="message" data-lang-key="form_message_label">문의 내용</label>
+                    <textarea id="message" name="message" required data-lang-key="form_message_placeholder" data-lang-attr="placeholder" placeholder="문의 내용을 상세하게 작성해 주세요. (예: [회사/대학명] 제휴 문의)"></textarea>
 
-                        <button type="submit" data-lang-key="form_submit_btn">문의 접수</button>
-                    </form>
-                    
-                    <div id="submit-message" style="display:none; margin-top: 20px; padding: 15px; border-radius: 8px; background: #e6f3ff; color: var(--accent); font-weight: 700;"></div>
+                    <button type="submit" data-lang-key="form_submit_btn">문의 접수</button>
+                </form>
+                
+                <div id="submit-message" style="display:none; margin-top: 20px; padding: 15px; border-radius: 8px; background: #e6f3ff; color: var(--accent); font-weight: 700;"></div>
 
-                    <div id="email-info" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px;">
-                        <div data-lang-key="contact_email_direct" style="font-size: 16px; font-weight: 600; color: #222; margin-bottom: 5px;">* 이메일 직접 문의</div>
-                        <a href="mailto:koreabestwork@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 18px; font-weight: 700;">koreabestwork@gmail.com</a>
-                    </div>
+                <div id="email-info" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px;">
+                    <div data-lang-key="contact_email_direct" style="font-size: 16px; font-weight: 600; color: #222; margin-bottom: 5px;">* 이메일 직접 문의</div>
+                    <a href="mailto:koreabestwork@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 18px; font-weight: 700;">koreabestwork@gmail.com</a>
                 </div>
             </div>
-
             <div class="social-links">
                 <a href="https://www.instagram.com/best_work_korea/" target="_blank" aria-label="BEST WORK Instagram">
                     <i class="fab fa-instagram"></i>
