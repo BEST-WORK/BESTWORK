@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -111,11 +110,63 @@
         section {
             padding: 40px 20px;
             border-bottom: 1px solid var(--light-bg);
+            position: relative; /* 자식 요소의 z-index를 위해 */
         }
 
         section:nth-child(even) {
             background-color: var(--light-bg);
         }
+
+        /* 회사 소개 섹션 (GIF 배경) */
+        #about {
+            background-image: url('https://github.com/BEST-WORK/BESTWORK/blob/main/Adobe%20Express%20-%20IMG_8171%20(1).gif?raw=true');
+            background-size: cover; /* 화면을 꽉 채우도록 */
+            background-position: center center; /* 중앙 정렬 */
+            background-repeat: no-repeat; /* 반복 없음 */
+            min-height: 500px; /* 배경 GIF가 잘 보이도록 최소 높이 설정 */
+            display: flex; /* 내용 중앙 정렬을 위해 */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white; /* 배경 위에 글씨가 잘 보이도록 */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 글씨 그림자 추가 */
+            position: relative;
+            overflow: hidden; /* GIF가 섹션을 벗어나지 않도록 */
+        }
+        
+        /* #about 섹션의 내용 컨테이너 */
+        #about .content-container {
+            position: relative;
+            z-index: 2; /* 배경 GIF 위에 오도록 */
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #about h2 {
+            font-size: 32px;
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        #about .content-box {
+            background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경으로 글씨 가독성 높임 */
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        #about .content-box h3 {
+            color: white;
+        }
+        #about ul li {
+             color: white;
+        }
+
 
         h2 {
             font-size: 24px;
@@ -215,33 +266,35 @@
     </header>
 
     <section id="about">
-        <h2 data-lang-ko="회사 소개" data-lang-en="About Us">회사 소개</h2>
-        <div class="content-box">
-            <h3 data-lang-ko="MISSION & VISION" data-lang-en="MISSION & VISION">MISSION & VISION</h3>
-            [cite_start]<p data-lang-ko="BESTWORK는 외국인이 유학과 취업을 통해 대한민국에 정착할 수 있도록 지원하며, 외국인과 대한민국의 가교 역할을 통해 함께 성장하는 미래를 만들어갑니다. [cite: 110]" 
-               [cite_start]data-lang-en="BESTWORK supports foreigners to settle in Korea through studying and employment, building a future of mutual growth by serving as a bridge between foreigners and Korea. [cite: 110]">
-                [cite_start]BESTWORK는 외국인이 유학과 취업을 통해 대한민국에 정착할 수 있도록 지원하며, 외국인과 대한민국의 가교 역할을 통해 함께 성장하는 미래를 만들어갑니다. [cite: 110]
-            </p>
-            <ul>
-                [cite_start]<li data-lang-ko="**VISION**: Best Person, Best Position, Best Time (최고의 인재를, 최고의 자리에, 최고의 타이밍에 배치합니다) [cite: 110]" 
-                    [cite_start]data-lang-en="**VISION**: Best Person, Best Position, Best Time (Placing the best talent in the best position at the best time) [cite: 110]">
-                    [cite_start]**VISION**: Best Person, Best Position, Best Time (최고의 인재를, 최고의 자리에, 최고의 타이밍에 배치합니다) [cite: 110]
-                </li>
-                [cite_start]<li data-lang-ko="**MISSION**: 최고의 인재 영입으로 사업을 변화시키자 (Transform businesses through a best recruitment experience) [cite: 110]" 
-                    [cite_start]data-lang-en="**MISSION**: Transform businesses through a best recruitment experience [cite: 110]">
-                    [cite_start]**MISSION**: 최고의 인재 영입으로 사업을 변화시키자 (Transform businesses through a best recruitment experience) [cite: 110]
-                </li>
-            </ul>
-        </div>
-        
-        <div class="content-box">
-            <h3 data-lang-ko="주요 연혁" data-lang-en="Business History">주요 연혁</h3>
-            <ul>
-                [cite_start]<li data-lang-ko="**2025.04**: (사)아산테크노밸리 입주기업체협의회 외국인 근로자 공급 업무협약 체결 [cite: 113][cite_start]" data-lang-en="**2025.04**: Signed MOU with Asan Technovalley Resident Company Association for foreign worker supply [cite: 113][cite_start]">**2025.04**: (사)아산테크노밸리 입주기업체협의회 외국인 근로자 공급 업무협약 체결 [cite: 113]</li>
-                [cite_start]<li data-lang-ko="**2025.01**: 숙명여자대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113][cite_start]" data-lang-en="**2025.01**: Signed Agreement with Sookmyung Women's University for international exchange and recruitment [cite: 113][cite_start]">**2025.01**: 숙명여자대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113]</li>
-                [cite_start]<li data-lang-ko="**2024.11**: 한라대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113][cite_start]" data-lang-en="**2024.11**: Signed Agreement with Halla University for international exchange and recruitment [cite: 113][cite_start]">**2024.11**: 한라대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113]</li>
-                [cite_start]<li data-lang-ko="**2023.11**: 베트남 노동 수출 회사(GLC Group 등)와 한국 내 인력 공급 협약 체결 [cite: 112][cite_start]" data-lang-en="**2023.11**: Signed labor supply agreement in Korea with Vietnamese labor export companies (GLC Group, etc.) [cite: 112][cite_start]">**2023.11**: 베트남 노동 수출 회사(GLC Group 등)와 한국 내 인력 공급 협약 체결 [cite: 112]</li>
-            </ul>
+        <div class="content-container">
+            <h2 data-lang-ko="회사 소개" data-lang-en="About Us">회사 소개</h2>
+            <div class="content-box">
+                <h3 data-lang-ko="MISSION & VISION" data-lang-en="MISSION & VISION">MISSION & VISION</h3>
+                [cite_start]<p data-lang-ko="BESTWORK는 외국인이 유학과 취업을 통해 대한민국에 정착할 수 있도록 지원하며, 외국인과 대한민국의 가교 역할을 통해 함께 성장하는 미래를 만들어갑니다. [cite: 110]" 
+                   [cite_start]data-lang-en="BESTWORK supports foreigners to settle in Korea through studying and employment, building a future of mutual growth by serving as a bridge between foreigners and Korea. [cite: 110]">
+                    [cite_start]BESTWORK는 외국인이 유학과 취업을 통해 대한민국에 정착할 수 있도록 지원하며, 외국인과 대한민국의 가교 역할을 통해 함께 성장하는 미래를 만들어갑니다. [cite: 110]
+                </p>
+                <ul>
+                    [cite_start]<li data-lang-ko="**VISION**: Best Person, Best Position, Best Time (최고의 인재를, 최고의 자리에, 최고의 타이밍에 배치합니다) [cite: 110]" 
+                        [cite_start]data-lang-en="**VISION**: Best Person, Best Position, Best Time (Placing the best talent in the best position at the best time) [cite: 110]">
+                        [cite_start]**VISION**: Best Person, Best Position, Best Time (최고의 인재를, 최고의 자리에, 최고의 타이밍에 배치합니다) [cite: 110]
+                    </li>
+                    [cite_start]<li data-lang-ko="**MISSION**: 최고의 인재 영입으로 사업을 변화시키자 (Transform businesses through a best recruitment experience) [cite: 110]" 
+                        [cite_start]data-lang-en="**MISSION**: Transform businesses through a best recruitment experience [cite: 110]">
+                        [cite_start]**MISSION**: 최고의 인재 영입으로 사업을 변화시키자 (Transform businesses through a best recruitment experience) [cite: 110]
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h3 data-lang-ko="주요 연혁" data-lang-en="Business History">주요 연혁</h3>
+                <ul>
+                    [cite_start]<li data-lang-ko="**2025.04**: (사)아산테크노밸리 입주기업체협의회 외국인 근로자 공급 업무협약 체결 [cite: 113][cite_start]" data-lang-en="**2025.04**: Signed MOU with Asan Technovalley Resident Company Association for foreign worker supply [cite: 113][cite_start]">**2025.04**: (사)아산테크노밸리 입주기업체협의회 외국인 근로자 공급 업무협약 체결 [cite: 113]</li>
+                    [cite_start]<li data-lang-ko="**2025.01**: 숙명여자대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113][cite_start]" data-lang-en="**2025.01**: Signed Agreement with Sookmyung Women's University for international exchange and recruitment [cite: 113][cite_start]">**2025.01**: 숙명여자대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113]</li>
+                    [cite_start]<li data-lang-ko="**2024.11**: 한라대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113][cite_start]" data-lang-en="**2024.11**: Signed Agreement with Halla University for international exchange and recruitment [cite: 113][cite_start]">**2024.11**: 한라대학교 국제교류 및 입학자원 발굴 협력 지원 협정서 체결 [cite: 113]</li>
+                    [cite_start]<li data-lang-ko="**2023.11**: 베트남 노동 수출 회사(GLC Group 등)와 한국 내 인력 공급 협약 체결 [cite: 112][cite_start]" data-lang-en="**2023.11**: Signed labor supply agreement in Korea with Vietnamese labor export companies (GLC Group, etc.) [cite: 112][cite_start]">**2023.11**: 베트남 노동 수출 회사(GLC Group 등)와 한국 내 인력 공급 협약 체결 [cite: 112]</li>
+                </ul>
+            </div>
         </div>
     </section>
 
@@ -319,7 +372,7 @@
     </section>
 
     <section id="contact">
-        <h2 data-lang-ko="Contact" data-lang-en="Contact">Contact</h2>
+        <h2 data-lang-ko="Contact" data-lang-en="Contact">Contact">Contact</h2>
         <div class="content-box">
             <h3 data-lang-ko="문의 및 연락처" data-lang-en="Inquiries and Contact Information">문의 및 연락처</h3>
             <p data-lang-ko="BEST WORK에 대한 문의 사항은 아래 이메일로 연락 주시면 신속하게 답변드리겠습니다." 
@@ -367,6 +420,7 @@
 
                     if (lang === 'ko' && koText) {
                         element.innerHTML = koText;
+                        // a 태그의 경우 textContent를 직접 변경
                         if (element.tagName === 'A') element.textContent = koText;
                     } else if (lang === 'en' && enText) {
                         element.innerHTML = enText;
