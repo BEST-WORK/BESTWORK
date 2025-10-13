@@ -121,7 +121,6 @@
             transition: transform 0.2s;
             margin-bottom: 0; /* flex gap 사용 */
         }
-        /* ... 기타 info-card 스타일 유지 ... */
         .info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); }
         .info-card .card-title { font-size: 1.2em; font-weight: bold; margin-top: 0; margin-bottom: 10px; color: #004d99; border-bottom: 2px solid #0066cc; padding-bottom: 5px; }
         .info-card .card-title i { margin-right: 8px; color: #0066cc; }
@@ -217,14 +216,13 @@
             transition: transform 0.3s, box-shadow 0.3s;
             border-left: 8px solid #ff9900; 
         }
-        /* ... 기타 country-card 스타일 유지 ... */
         .country-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); }
         .country-card .flag-name { font-size: 1.3em; font-weight: 800; color: #004d99; margin-bottom: 10px; display: flex; align-items: center; padding-bottom: 8px; border-bottom: 2px solid #eee; }
         .country-card .flag-name span { font-size: 2.2em; margin-right: 12px; line-height: 1; }
         .country-card p { font-size: 0.95em; color: #333; margin: 0; text-align: left; }
         
         /* ---------------------------------------------------- */
-        /* 5. 제휴 대학 섹션 디자인 (모바일 - 1열) */
+        /* 5. 제휴 대학 섹션 디자인 (모바일 - 롤링 배너) */
         /* ---------------------------------------------------- */
         #universities { background-color: #f8f8f8; padding: 0; }
         #universities h2 {
@@ -245,27 +243,67 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        /* ... 기타 carousel, university-card-item 스타일 유지 ... */
+
+        .university-carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover; 
+            background-position: center;
+            transition: opacity 1s ease-in-out; /* 부드러운 전환 효과 */
+            opacity: 0; /* 기본적으로 숨김 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .university-carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 77, 153, 0.4); 
+            z-index: 1;
+        }
+
+        .university-carousel-item.active {
+            opacity: 1; /* 활성화된 이미지만 표시 */
+        }
+        
+        #universities-intro-1, #universities-intro-2, #universities-intro-3 {
+            color: white;
+            font-size: 1.15em; 
+            font-weight: 800; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 2;
+            position: relative;
+            margin: 0 20px; 
+            text-align: center;
+            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.3); 
+            border-radius: 5px;
+        }
+
         .university-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 모바일에서 최소 280px 간격으로 1~2열 */
             gap: 15px;
             margin-top: 20px;
         }
-
+        
         /* ---------------------------------------------------- */
         /* 6. Contact & Footer */
         /* ---------------------------------------------------- */
         footer { text-align: center; font-size: 0.7em; color: #777; padding: 10px 0; }
         footer .centered-content-area { padding: 0 15px; }
 
-        /* ... Form Styles 유지 ... */
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; font-family: inherit; }
         #c-submit-btn { width: 100%; background-color: #0066cc; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold; margin-top: 10px; transition: background-color 0.3s; }
         
         
         /* ==================================================== */
-        /* 반응형 디자인 (PC/태블릿 환경) */
+        /* 반응형 디자인 (PC/태블릿 환경: 769px 이상) */
         /* ==================================================== */
         @media (min-width: 769px) {
             
@@ -289,7 +327,7 @@
             /* 3. 회사소개 카드 레이아웃 (3열) */
             .card-container {
                 flex-direction: row; /* 수평 정렬 */
-                flex-wrap: wrap; /* 카드가 넘치면 줄 바꿈 */
+                flex-wrap: wrap; 
             }
             .info-card {
                 flex: 1 1 calc(33.333% - 10px); /* 3분의 1 너비 - gap */
