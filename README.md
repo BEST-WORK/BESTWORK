@@ -265,8 +265,8 @@
             opacity: 0; /* 기본적으로 숨김 */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* **수정: 콘텐츠를 상단에 정렬** */
-            padding-top: 30px; /* 상단으로부터 띄우는 간격 추가 */
+            align-items: flex-start; /* **상단 정렬 유지** */
+            padding-top: 30px; /* 상단으로부터 띄우는 간격 유지 */
         }
 
         .university-carousel-item::before {
@@ -288,7 +288,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 2;
             position: relative;
-            margin: 0 20px; /* 가로 중앙 정렬 및 너비 제약 */
+            margin: 0 20px; 
             text-align: center;
             padding: 5px 10px;
             background-color: rgba(0, 0, 0, 0.3); 
@@ -347,6 +347,29 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; font-family: inherit; }
         #c-submit-btn { width: 100%; background-color: #0066cc; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold; margin-top: 10px; transition: background-color 0.3s; }
         
+        /* 소셜 링크 아이콘 크기 및 간격 수정 */
+        .social-links {
+            text-align: center; 
+            margin-top: 30px; 
+            padding-top: 15px; 
+            border-top: 1px solid #ddd;
+        }
+        .social-links a {
+            color: #3b5998; /* Facebook blue */
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .social-links a:last-child {
+            color: #c32aa3; /* Instagram purple/pink */
+        }
+
+        .social-links a i {
+            font-size: 2.5em; /* **아이콘 크기 확대** */
+        }
+        
+        .social-links a:hover {
+            opacity: 0.8;
+        }
         
         /* ==================================================== */
         /* 반응형 디자인 (PC/태블릿 환경: 769px 이상) */
