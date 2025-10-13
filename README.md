@@ -217,12 +217,21 @@
             border-left: 8px solid #ff9900; 
         }
         .country-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); }
-        .country-card .flag-name { font-size: 1.3em; font-weight: 800; color: #004d99; margin-bottom: 10px; display: flex; align-items: center; padding-bottom: 8px; border-bottom: 2px solid #eee; }
+        .country-card .flag-name { 
+            font-size: 1.3em; 
+            font-weight: 800; 
+            color: #004d99; 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+            padding-bottom: 8px; 
+            border-bottom: 2px solid #eee; 
+        }
         .country-card .flag-name span { font-size: 2.2em; margin-right: 12px; line-height: 1; }
         .country-card p { font-size: 0.95em; color: #333; margin: 0; text-align: left; }
         
         /* ---------------------------------------------------- */
-        /* 5. 제휴 대학 섹션 디자인 (모바일 - 롤링 배너 재추가) */
+        /* 5. 제휴 대학 섹션 디자인 (롤링 배너 재추가 및 카드 디자인 통일) */
         /* ---------------------------------------------------- */
         #universities { background-color: #f8f8f8; padding: 0; }
         #universities h2 {
@@ -286,7 +295,6 @@
         }
 
         .university-content-container {
-             /* 캐러셀이 H2 다음에 오도록 패딩 조정 */
             padding-top: 0;
         }
         
@@ -297,6 +305,38 @@
             margin-top: 20px;
         }
         
+        /* 제휴 대학 카드 디자인 (주요 국가 카드와 통일) */
+        .university-card-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 8px solid #ff9900; /* 주요 국가 카드와 동일한 주황색 강조 */
+        }
+        .university-card-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); 
+        }
+
+        /* 대학 이름 (strong 태그) 스타일 */
+        .university-card-item strong {
+            font-size: 1.3em; 
+            font-weight: 800; 
+            color: #004d99; /* 주요 국가 타이틀과 동일한 색상 */
+            margin-bottom: 10px; 
+            display: block; 
+            padding-bottom: 8px; 
+            border-bottom: 2px solid #eee; /* 구분선 */
+        }
+        .university-card-item p {
+            font-size: 0.95em; 
+            color: #333; 
+            margin: 0; 
+            text-align: left; 
+            margin-top: 10px;
+        }
+
         /* ---------------------------------------------------- */
         /* 6. Contact & Footer */
         /* ---------------------------------------------------- */
@@ -584,7 +624,7 @@
 
             // 제휴 대학
             'section-universities-h2': '제휴 대학 🎓',
-            'universities-intro': 'BEST WORK는 아래 대학교들과 유학생 유치를 위해 협력하고 있습니다.',
+            'universities-intro': 'BEST WORK와 협력하는 국내 유수 대학입니다. 외국인 유학생 유치 및 학업 지원을 위해 협력하고 있습니다.',
             'universities-data': [
                 { name: '숙명여자대학교', desc: "<strong>'S 리더십'을 갖춘 여성리더 육성</strong>을 목표로 하는 사학으로, 다전공 과정이 유연하며 학생들의 성과가 뛰어납니다." },
                 { name: '건국대학교', desc: "(일반 소개): 서울과 충주에 캠퍼스를 둔 사립 종합대학입니다. '창의와 성실'을 교시로 하며, 다양한 학문 분야의 융합과 연구를 통해 국가 및 사회 발전에 기여하고 있습니다." },
@@ -677,7 +717,7 @@
 
             // 제휴 대학
             'section-universities-h2': 'Partner Universities 🎓',
-            'universities-intro': 'BEST WORK는 아래 대학교들과 유학생 유치를 위해 협력하고 있습니다.',
+            'universities-intro': 'BEST WORK is in partnership with leading Korean universities to recruit international students and support their academic journey.',
             'universities-data': [
                 { name: 'Sookmyung Women\'s Univ.', desc: "A private university aiming to cultivate female leaders with **'S Leadership'**, known for strong student outcomes and flexible multi-major programs." },
                 { name: 'Konkuk University', desc: "(General Info): A private comprehensive university with campuses in Seoul and Chungju, contributing to society through research and the convergence of various academic fields." },
@@ -837,7 +877,7 @@
         universitiesGrid.innerHTML = '';
         data['universities-data'].forEach(item => {
             const card = document.createElement('div');
-            card.className = 'university-card-item with-texture'; /* 텍스처 클래스 추가 */
+            card.className = 'university-card-item'; /* 클래스명만 남기고 텍스처 클래스는 제거 */
             
             // item.desc에 포함된 <strong> 태그를 포함하여 출력
             const description = item.desc;
