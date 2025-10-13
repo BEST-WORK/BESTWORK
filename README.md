@@ -10,9 +10,9 @@
         /* Reset and Base Styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html { 
-            /* 여백 없이 전체 화면을 덮도록 설정 */
-            height: 100%; 
-            overflow-x: hidden; 
+            /* ⚠️ 수정: height: 100% 대신 min-height: 100% 사용 */
+            min-height: 100%; 
+            /* ⚠️ 수정: 가로 스크롤 이슈 최소화를 위해 overflow-x: hidden 제거 */
             font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif; 
             color: #222; 
         }
@@ -116,7 +116,8 @@
             top: var(--nav-height); /* 네비게이션바 바로 아래에서 시작 */
             left: 0;
             width: 100%;
-            height: calc(100vh - var(--nav-height));
+            /* ⚠️ 수정: 모바일 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 */
+            height: calc(100dvh - var(--nav-height));
             background: rgba(11, 18, 32, 0.98);
             z-index: 999;
             display: flex;
@@ -149,7 +150,9 @@
         /* Header (Full Screen Hero) */
         header {
             position: relative;
-            height: 100vh;
+            /* ⚠️ 수정: 모바일 가로/세로 전환시 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 및 min-height 추가 */
+            min-height: 500px; /* 최소 높이 지정 */
+            height: 100dvh; 
             width: 100%;
             display: flex;
             align-items: center;
