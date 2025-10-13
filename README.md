@@ -116,7 +116,7 @@
             top: var(--nav-height); /* 네비게이션바 바로 아래에서 시작 */
             left: 0;
             width: 100%;
-            /* ⚠️ 수정: 모바일 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 */
+            /* ⚠️ 수정 유지: 모바일 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 */
             height: calc(100dvh - var(--nav-height));
             background: rgba(11, 18, 32, 0.98);
             z-index: 999;
@@ -150,7 +150,7 @@
         /* Header (Full Screen Hero) */
         header {
             position: relative;
-            /* ⚠️ 수정: 모바일 가로/세로 전환시 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 및 min-height 추가 */
+            /* ⚠️ 수정 유지: 모바일 가로/세로 전환시 뷰포트 오류 해결을 위해 100vh를 100dvh로 변경 및 min-height 추가 */
             min-height: 500px; /* 최소 높이 지정 */
             height: 100dvh; 
             width: 100%;
@@ -191,15 +191,33 @@
         .btn:hover { background: #e8e8e8; }
 
         /* Section Styling */
-        section { padding: 100px 20px 80px 20px; background: #fff; color: #222; text-align: center; }
+        section { 
+            padding: 100px 20px 80px 20px; 
+            background: #fff; 
+            color: #222; 
+            text-align: center; 
+            /* ⚠️ 추가: 내용이 넘치지 않도록 height를 지정하지 않고, 
+               min-height를 0으로 설정하여 유연하게 늘어나도록 보장 */
+            min-height: 0;
+        }
         h2 { font-size: 26px; margin-bottom: 16px; }
         .muted { color: var(--muted); }
         .container { max-width: 1100px; margin: 0 auto; }
+        
+        /* ⚠️ 추가: #about 섹션 내부 flex 레이아웃이 모바일에서 세로로 충분히 늘어나도록 보장 */
+        #about .container > div {
+            flex-wrap: wrap; /* 모바일에서 자동으로 줄 바꿈 */
+        }
+        #about .text-content {
+            padding: 0; 
+            text-align: left;
+        }
 
         /* Services Section (배경 이미지/영상이 여백 없이 화면을 덮도록 no-repeat 추가) */
         #services {
             position: relative;
-            background: url('https://github.com/BEST-WORK/BESTWORK/blob/main/IMG_8690.gif?raw=true') center center/cover no-repeat fixed;
+            /* ⚠️ 수정: 모바일에서 레이아웃 깨짐 방지를 위해 fixed를 scroll로 변경 */
+            background: url('https://github.com/BEST-WORK/BESTWORK/blob/main/IMG_8690.gif?raw=true') center center/cover no-repeat scroll;
         }
         #services::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); z-index: 1; }
         #services .container > * { position: relative; z-index: 2; }
@@ -230,7 +248,16 @@
         .card-vietnam { background: linear-gradient(135deg, #DA251D 0%, #D61A13 100%); }
 
         /* Slider Styles */
-        .slider-container { position: relative; max-width: 900px; height: 400px; margin: 0 auto 50px auto; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        .slider-container { 
+            position: relative; 
+            max-width: 900px; 
+            height: 400px; /* 데스크톱 기준 높이 유지 */
+            min-height: 250px; /* 모바일에서 최소 높이 보장 */
+            margin: 0 auto 50px auto; 
+            overflow: hidden; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+        }
         .slider-wrapper { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
         .slide { min-width: 100%; height: 100%; position: relative; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
         .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -240,10 +267,6 @@
         .slider-button:hover { background: rgba(0, 0, 0, 0.7); opacity: 1; }
         #prev-button { left: 10px; }
         #next-button { right: 10px; }
-        @media (max-width: 768px) {
-            .slider-container { height: 300px; }
-            .slider-button { width: 30px; height: 30px; font-size: 18px; }
-        }
 
         /* Contact Section */
         #contact-form label { display: block; text-align: left; font-size: 14px; font-weight: 600; margin-bottom: 5px; color: #333; }
@@ -266,31 +289,50 @@
         @media (max-width: 900px) {
             .navbar-links a { margin-left: 15px; font-size: 14px; }
         }
-        
+
         @media (max-width: 768px) {
             /* Navbar Link Group, Language Switcher 숨김 (버거 메뉴로 대체) */
             .navbar-links, .lang-switcher {
                 display: none;
             }
-            
+
             /* Burger Menu 보임 */
             .burger-menu {
                 display: block;
             }
-            
+
             .logo { font-size: 42px !important; }
             header h1 { font-size: 28px; }
-            
+
             .card-grid { grid-template-columns: 1fr; }
             
             /* [회사 소개 섹션 (About) 모바일 레이아웃] */
             #about .container > div {
-                flex-direction: column; 
-                padding: 0; 
+                flex-direction: column;
+                padding: 0;
             }
             #about .text-content {
-                padding: 20px 0 0 0 !important; 
-                text-align: center !important; 
+                padding: 20px 0 0 0 !important;
+                text-align: center !important;
+            }
+            
+            /* [주요 서비스 섹션 (Services) 모바일 레이아웃] - 내용 잘림 수정 */
+            #services > .container > div {
+                flex-direction: column; 
+                gap: 20px; /* 간격 축소 */
+            }
+            #services > .container > div > div {
+                width: 100%; /* 카드를 모바일에서 100% 폭으로 확장하여 내용이 잘리지 않도록 함 */
+            }
+            
+            /* [제휴 대학교 섹션 (Universities) 슬라이더 높이] */
+            .slider-container { 
+                height: 300px; 
+            }
+            .slider-button { 
+                width: 30px; 
+                height: 30px; 
+                font-size: 18px; 
             }
         }
     </style>
