@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -126,7 +127,7 @@
 
 
         /* ---------------------------------------------------- */
-        /* 2. 서비스 섹션 배경 이미지 및 텍스트 스타일 (밝게, 깔끔하게 수정됨) */
+        /* 2. 서비스 섹션 (밝은 플로팅 텍스트 디자인) */
         /* ---------------------------------------------------- */
         #services {
             padding-left: 0; padding-right: 0; 
@@ -144,63 +145,57 @@
             align-items: center; 
             text-align: center;
         }
-        /* 밝고 깔끔한 디자인을 위해 오버레이 밝기 조정 (0.5 -> 0.2) */
+        /* 밝은 오버레이 유지 (배경 이미지가 잘 보이게) */
         #services::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.2); /* 어두운 오버레이를 훨씬 밝게 조정 */
+            background-color: rgba(0, 0, 0, 0.2); /* 밝은 오버레이 */
             z-index: 1;
         }
-        #services h2, #services .section-content {
-            z-index: 2; 
-            color: white; /* h2는 흰색 유지 */
-            padding: 0 15px; 
-            max-width: 600px; 
-            width: 100%;
-            box-sizing: border-box; 
-        }
         #services h2 {
+            z-index: 2; 
+            color: white; 
             border-bottom: 2px solid #ff9900; 
             padding-bottom: 10px;
             font-size: 1.8em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             margin-bottom: 20px;
+            padding: 0 15px 10px 15px; /* 제목 패딩 */
         }
-        /* 새로운 서비스 카드 컨테이너 */
-        .service-card {
-            background-color: rgba(255, 255, 255, 0.95); /* 깔끔한 반투명 흰색 카드 */
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: left;
-            transition: transform 0.3s;
-            color: #333; /* 텍스트 색상을 어둡게 */
-        }
-        .service-card:hover {
-            transform: translateY(-3px);
+        
+        /* 텍스트 컨테이너 스타일 */
+        #services .section-content {
+            z-index: 2; 
+            color: white; 
+            padding: 0 30px; /* 좌우 패딩을 조금 더 주고 중앙에 모이게 */
+            max-width: 600px; 
+            width: 100%;
+            box-sizing: border-box; 
+            text-align: left; /* 텍스트는 다시 왼쪽 정렬 */
         }
 
-        .service-card .item-title {
-            color: #004d99; /* 제목 색상 강조 (다크 블루) */
-            font-size: 1.2em;
+        /* 서비스 아이템 제목 스타일 (item-title) */
+        .item-title {
+            color: #ff9900; /* 제목 색상 강조 (주황색) */
+            font-size: 1.25em; /* 제목 조금 더 크게 */
             font-weight: bold;
-            margin-top: 0;
+            margin-top: 25px; /* 위 간격 확보 */
             margin-bottom: 5px;
-            border-bottom: 1px dashed #ff9900; /* 주황색 점선 */
-            padding-bottom: 5px;
             display: block;
-            text-shadow: none;
-            text-align: left;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1); /* 짙은 그림자로 가독성 확보 */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.7); /* 흰색 구분선 추가 */
+            padding-bottom: 5px;
         }
-        .service-card p {
-            background-color: transparent; /* 이전 배경 제거 */
+
+        /* 서비스 아이템 내용 스타일 */
+        #services .section-content p {
+            background-color: transparent; 
             padding: 0;
-            border-radius: 0;
-            margin: 0;
-            text-shadow: none;
-            color: #333; /* 본문 텍스트 색상 */
+            margin-bottom: 25px; /* 항목 간 간격 증가 */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); /* 강한 그림자로 가독성 확보 */
+            color: white; /* 흰색 본문 */
+            font-size: 1.05em;
         }
         
         /* ---------------------------------------------------- */
@@ -512,20 +507,14 @@
         <h2 id="section-services-h2">서비스 (What We Do?)</h2>
         <div class="section-content">
             
-            <div class="service-card">
-                <p id="service-consulting-title" class="item-title"></p>
-                <p id="service-consulting-content"></p>
-            </div>
+            <p id="service-consulting-title" class="item-title"></p>
+            <p id="service-consulting-content"></p>
             
-            <div class="service-card">
-                <p id="service-visa-title" class="item-title"></p>
-                <p id="service-visa-content"></p>
-            </div>
+            <p id="service-visa-title" class="item-title"></p>
+            <p id="service-visa-content"></p>
 
-            <div class="service-card">
-                <p id="service-job-title" class="item-title"></p>
-                <p id="service-job-content"></p>
-            </div>
+            <p id="service-job-title" class="item-title"></p>
+            <p id="service-job-content"></p>
             
         </div>
     </section>
@@ -835,7 +824,7 @@
         document.getElementById('about-business-title').childNodes[1].nodeValue = ` ${data['about-business-title']}`;
 
         // 서비스 섹션 업데이트 (3개 항목)
-        // 이 내용은 이제 service-card div 내의 p 태그로 로드됩니다.
+        // 카드 없이 텍스트만 로드
         document.getElementById('service-consulting-title').textContent = data['service-consulting-title'];
         document.getElementById('service-consulting-content').innerHTML = data['service-consulting-content'];
         document.getElementById('service-visa-title').textContent = data['service-visa-title'];
