@@ -265,7 +265,8 @@
             opacity: 0; /* 기본적으로 숨김 */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* **수정: 콘텐츠를 상단에 정렬** */
+            padding-top: 30px; /* 상단으로부터 띄우는 간격 추가 */
         }
 
         .university-carousel-item::before {
@@ -287,7 +288,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 2;
             position: relative;
-            margin: 0 20px; 
+            margin: 0 20px; /* 가로 중앙 정렬 및 너비 제약 */
             text-align: center;
             padding: 5px 10px;
             background-color: rgba(0, 0, 0, 0.3); 
