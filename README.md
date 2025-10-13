@@ -7,17 +7,26 @@
     <style>
         /* 기본 스타일 및 초기화 */
         body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; line-height: 1.6; }
-        .container { 
-            width: 100%; max-width: 600px; margin: 0 auto; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            padding-top: 50px; 
+        
+        /* ---------------------------------------------------- */
+        /* 공통: 중앙 정렬 및 최대 너비 설정 */
+        /* ---------------------------------------------------- */
+        .centered-content-area, .centered-content-header {
+            width: 100%;
+            max-width: 600px; /* 최대 너비 제한 */
+            margin: 0 auto; /* 중앙 정렬 */
+            box-sizing: border-box;
         }
         
         /* ---------------------------------------------------- */
         /* 헤더 (회사 이름 및 언어 선택) */
         /* ---------------------------------------------------- */
         header { 
-            background-color: #004d99; color: white; padding: 10px 15px; text-align: center; 
-            position: fixed; top: 0; left: 0; right: 0; z-index: 2000; max-width: 600px; margin: 0 auto;
+            background-color: #004d99; color: white; 
+            position: fixed; top: 0; left: 0; right: 0; z-index: 2000; 
+        }
+        header .centered-content-header {
+            padding: 10px 15px; /* 내부 패딩 적용 */
             display: flex; justify-content: space-between; align-items: center; 
         }
         header h1 { margin: 0; font-size: 1.5em; text-align: left; }
@@ -31,67 +40,79 @@
         .lang-switch button.active { background-color: #ff9900; } 
         
         /* ---------------------------------------------------- */
-        /* 1. BEST WORK 섹션 (GIF 배경 및 우측 상단 세로 메뉴) */
+        /* 1. BEST WORK 섹션 (배경 Full-Width) */
         /* ---------------------------------------------------- */
         #home {
-            padding-left: 0; padding-right: 0;
+            padding: 0; /* 섹션 자체 패딩 제거 */
+            padding-top: 50px; /* Fixed Header Offset */
             height: 50vh; 
-            /* 내부 콘텐츠 중앙 정렬 (h2, p) */
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-            text-align: center; border-bottom: none;
             
             background-image: url('https://github.com/BEST-WORK/BESTWORK/blob/main/Adobe%20Express%20-%20IMG_8171%20(1).gif?raw=true');
             background-size: cover; background-position: center; background-repeat: no-repeat;
-            position: relative; /* 메뉴의 absolute 위치 기준점 */
+            position: relative; 
         }
-        /* #home::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        #home .centered-content-area {
+            /* 내부 콘텐츠 중앙 정렬 */
+            height: 100%;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+            text-align: center; 
+            padding-top: 0; padding-bottom: 0; /* 수직 패딩은 flex로 제어 */
+        }
+        /* #home::before { /* 오버레이 */
+            /* content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(0, 0, 0, 0.3); z-index: 1; 
         } */ 
         #home h2 { color: white; border-bottom: none; z-index: 2; margin-bottom: 10px;
             font-size: 1.8em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
-        #home .section-content { color: white; padding: 0 20px; z-index: 2; }
+        #home .section-content { color: white; z-index: 2; }
         #home .section-content p { margin: 0; font-size: 1.1em; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); }
 
         /* 인라인 메뉴 스타일 (세로 배치 및 박스 제거) */
         .main-nav-inline {
             z-index: 3; 
-            position: absolute; /* 절대 위치 지정 */
-            top: 15px; /* 상단에서 15px 떨어진 위치 */
-            right: 15px; /* 우측에서 15px 떨어진 위치 */
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
             display: flex;
-            flex-direction: column; /* 세로로 배치 */
-            align-items: flex-end; /* 메뉴 항목을 우측 정렬 */
+            flex-direction: column; 
+            align-items: flex-end; 
         }
         .main-nav-inline a {
             color: white; 
             text-decoration: none;
             font-weight: 600;
-            padding: 3px 0; /* 상하 여백만 부여 (좌우 여백 제거) */
-            margin: 3px 0; /* 세로 간격 확보 */
+            padding: 3px 0; 
+            margin: 3px 0; 
             font-size: 0.9em;
             transition: color 0.3s;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); /* 글자 가시성 확보 */
-            /* 네모 박스 스타일 제거 */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); 
             border: none;
             background-color: transparent;
         }
         .main-nav-inline a:hover {
-            color: #ff9900; /* 호버 시 주황색 텍스트로 변경 */
+            color: #ff9900; 
             background-color: transparent;
         }
         
         /* ---------------------------------------------------- */
-        /* 섹션 공통 및 회사소개 카드 스타일 */
+        /* 섹션 공통 및 회사소개 카드 스타일 (내용은 중앙 정렬) */
         /* ---------------------------------------------------- */
-        section { padding: 20px 15px; border-bottom: 1px solid #eee; }
+        section { 
+            padding: 0; /* 섹션 자체 패딩 제거 */
+            border-bottom: 1px solid #eee; 
+            background-color: #fff; /* 기본 배경색 지정 */
+        }
+        /* 모든 내용에 내부 패딩 적용 */
+        .centered-content-area {
+            padding: 20px 15px;
+        }
+
         section h2 { color: #004d99; border-bottom: 2px solid #004d99; padding-bottom: 5px; font-size: 1.3em; margin-top: 0; }
         
         /* 회사소개 카드 공통 스타일 */
         .card-container { margin-top: 15px; }
         .info-card {
-            /* 모든 카드를 동일한 기본 스타일로 통일 */
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 20px; 
@@ -104,17 +125,15 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
-        /* 카드 제목 스타일 통일: 파란색 테마 */
         .info-card .card-title {
             font-size: 1.2em;
             font-weight: bold;
             margin-top: 0;
             margin-bottom: 10px;
-            color: #004d99; /* 통일된 파란색 */
-            border-bottom: 2px solid #0066cc; /* 제목 아래 구분선 추가 */
+            color: #004d99; 
+            border-bottom: 2px solid #0066cc; 
             padding-bottom: 5px;
         }
-        /* 카드 제목 아이콘 색상 통일 (Vision, Mission 아이콘 모두 파란색) */
         .info-card .card-title i {
             margin-right: 8px;
             color: #0066cc;
@@ -122,14 +141,14 @@
 
         /* 주요 사업 리스트 점 제거 */
         ul.no-bullet-list { list-style: none; padding-left: 0; }
-        ul.no-bullet-list li { margin-bottom: 5px; } /* 리스트 간격 조정 */
+        ul.no-bullet-list li { margin-bottom: 5px; } 
 
 
         /* ---------------------------------------------------- */
-        /* 2. 서비스 섹션 (밝은 플로팅 텍스트 디자인) */
+        /* 2. 서비스 섹션 (배경 Full-Width, 텍스트만) */
         /* ---------------------------------------------------- */
         #services {
-            padding-left: 0; padding-right: 0; 
+            padding: 0; 
             height: auto; 
             min-height: 80vh; 
             
@@ -138,62 +157,60 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
             text-align: center;
         }
-        /* 밝은 오버레이 유지 (배경 이미지가 잘 보이게) */
+        /* 밝은 오버레이 유지 */
         #services::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.2); /* 밝은 오버레이 */
+            background-color: rgba(0, 0, 0, 0.2); 
             z-index: 1;
         }
-        #services h2 {
+        #services .centered-content-area {
             z-index: 2; 
             color: white; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; /* 내용 수직 중앙 정렬 */
+            align-items: center; 
+            min-height: 80vh; /* 섹션 높이와 동일하게 설정 */
+            text-align: left; /* 텍스트는 다시 왼쪽 정렬 */
+        }
+        
+        #services h2 {
             border-bottom: 2px solid #ff9900; 
-            padding-bottom: 10px;
             font-size: 1.8em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             margin-bottom: 20px;
-            padding: 0 15px 10px 15px; /* 제목 패딩 */
+            padding: 0 0 10px 0; /* 패딩은 .centered-content-area가 담당 */
+            width: 100%; /* 제목도 max-width 600px 내에서 100% 사용 */
         }
         
-        /* 텍스트 컨테이너 스타일 */
-        #services .section-content {
-            z-index: 2; 
-            color: white; 
-            padding: 0 30px; /* 좌우 패딩을 조금 더 주고 중앙에 모이게 */
-            max-width: 600px; 
-            width: 100%;
-            box-sizing: border-box; 
-            text-align: left; /* 텍스트는 다시 왼쪽 정렬 */
-        }
-
         /* 서비스 아이템 제목 스타일 (item-title) */
         .item-title {
-            color: #ff9900; /* 제목 색상 강조 (주황색) */
-            font-size: 1.25em; /* 제목 조금 더 크게 */
+            color: #ff9900; 
+            font-size: 1.25em; 
             font-weight: bold;
-            margin-top: 25px; /* 위 간격 확보 */
+            margin-top: 25px; 
             margin-bottom: 5px;
             display: block;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1); /* 짙은 그림자로 가독성 확보 */
-            border-bottom: 2px solid rgba(255, 255, 255, 0.7); /* 흰색 구분선 추가 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1); 
+            border-bottom: 2px solid rgba(255, 255, 255, 0.7); 
             padding-bottom: 5px;
+            width: 100%;
         }
 
         /* 서비스 아이템 내용 스타일 */
+        #services .section-content {
+            width: 100%; /* 텍스트 내용이 .centered-content-area 내부에서 100% 사용 */
+        }
         #services .section-content p {
             background-color: transparent; 
             padding: 0;
-            margin-bottom: 25px; /* 항목 간 간격 증가 */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); /* 강한 그림자로 가독성 확보 */
-            color: white; /* 흰색 본문 */
+            margin-bottom: 25px; 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); 
+            color: white; 
             font-size: 1.05em;
         }
         
@@ -253,19 +270,24 @@
         /* ---------------------------------------------------- */
         #universities {
             background-color: #f8f8f8; 
-            padding-left: 0;
-            padding-right: 0;
+            padding: 0; /* 섹션 자체 패딩 제거 */
         }
+        /* 섹션 제목만 별도로 중앙 정렬 및 패딩 적용 */
         #universities h2 {
-            padding: 0 15px 5px 15px; /* 제목 좌우 패딩만 추가 */
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 15px 5px 15px; /* 제목 좌우 및 상단 패딩 */
             margin-bottom: 15px;
+            box-sizing: border-box;
+            /* 기존 h2 스타일 유지 */
+            color: #004d99; border-bottom: 2px solid #004d99; font-size: 1.3em; margin-top: 0;
         }
 
-        /* 슬라이드쇼 컨테이너 - 높이 확장: 200px -> 300px */
+        /* 슬라이드쇼 컨테이너 - Full-Width */
         .university-carousel-wrapper {
             position: relative;
             width: 100%;
-            height: 300px; /* 높이 고정 (확장) */
+            height: 300px; 
             overflow: hidden;
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -277,10 +299,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover; /* 배경 이미지 크기 유지 */
+            background-size: cover; 
             background-position: center;
             transition: opacity 1s ease-in-out;
-            opacity: 0; /* 기본적으로 숨김 */
+            opacity: 0; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -290,8 +312,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            /* 오버레이 색상을 투명도를 낮춰 이미지 선명도 증가 */
-            background-color: rgba(0, 77, 153, 0.4); /* Deep Blue overlay (Opacity lowered from 0.7 to 0.4) */
+            background-color: rgba(0, 77, 153, 0.4); 
             z-index: 1;
         }
 
@@ -306,16 +327,17 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 2;
             position: relative;
-            margin: 0 20px; /* 텍스트 좌우 여백 */
+            margin: 0 20px; 
             text-align: center;
             padding: 5px 10px;
-            background-color: rgba(0, 0, 0, 0.3); /* 텍스트 가독성을 위한 배경 추가 */
+            background-color: rgba(0, 0, 0, 0.3); 
             border-radius: 5px;
         }
 
-        /* 대학 카드 그리드 */
-        .university-content-container {
-            padding: 0 15px 20px 15px; /* 섹션 본문 패딩 */
+        /* 대학 카드 그리드 컨테이너는 중앙 정렬 */
+        .university-content-container.centered-content-area {
+            padding-top: 0;
+            padding-bottom: 20px;
         }
 
         .university-grid {
@@ -324,7 +346,7 @@
             gap: 15px;
             margin-top: 20px;
         }
-
+        /* ... 대학 카드 스타일 유지 ... */
         .university-card-item {
             background-color: #ffffff;
             border-radius: 12px;
@@ -334,10 +356,9 @@
             border: 1px solid #ddd;
             overflow: hidden;
             position: relative;
-            border-right: 8px solid #004d99; /* 활동적인 느낌을 주는 강한 오른쪽 경계선 */
+            border-right: 8px solid #004d99; 
         }
         
-        /* Image 2 적용: Subtle background texture to the cards */
         .university-card-item.with-texture::after {
             content: '';
             position: absolute;
@@ -375,26 +396,31 @@
             z-index: 1;
         }
 
-        /* 기타 섹션 스타일 및 데스크탑 뷰 */
-        ul.styled-list { display: none; } 
-
+        /* ---------------------------------------------------- */
+        /* 6. Contact & Footer */
+        /* ---------------------------------------------------- */
         .contact-info a { color: #0066cc; text-decoration: none; word-break: break-all; }
         .social-links { text-align: center; margin-top: 20px; }
         .social-links a { color: #004d99; font-size: 2em; margin: 0 10px; transition: color 0.3s; }
-        footer { text-align: center; font-size: 0.7em; color: #777; padding: 10px; }
+        
+        footer { 
+            text-align: center; font-size: 0.7em; color: #777; 
+            padding: 10px 0; /* Vertical padding */
+        }
+        footer .centered-content-area {
+            padding: 0 15px;
+        }
 
         /* Form Styles (Inline) */
         .form-group {
             margin-bottom: 15px;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #333;
         }
-
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 10px;
@@ -405,9 +431,7 @@
             font-family: inherit;
         }
 
-        .form-group textarea {
-            resize: vertical;
-        }
+        .form-group textarea { resize: vertical; }
 
         #c-submit-btn {
             width: 100%;
@@ -422,106 +446,114 @@
             margin-top: 10px;
             transition: background-color 0.3s;
         }
-
-        #c-submit-btn:hover {
-            background-color: #004d99;
-        }
+        #c-submit-btn:hover { background-color: #004d99; }
 
         @media (min-width: 601px) {
-            header { position: static; max-width: none; justify-content: flex-start; }
-            .header-controls { display: flex; margin-left: auto; }
-            #services {
-                background-attachment: fixed; 
+            header { position: static; }
+            header .centered-content-header { 
+                position: static; 
+                max-width: 100%; /* 데스크탑에서 헤더는 전체 너비 사용 */
+                max-width: none;
             }
+            #home { padding-top: 0; } /* 데스크탑에서는 fixed header offset 제거 */
+            #services { background-attachment: fixed; }
             .country-grid, .university-grid {
                 grid-template-columns: repeat(2, 1fr); 
             }
             .university-carousel-wrapper {
-                 height: 400px; /* 데스크탑에서 더 크게 */
+                 height: 400px; 
             }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
     <header>
-        <h1 id="header-h1">BEST WORK</h1>
-        <div class="header-controls">
-            <div class="lang-switch">
-                <button id="lang-ko" onclick="setLanguage('ko')" class="active">KOR</button>
-                <button id="lang-en" onclick="setLanguage('en')">ENG</button>
+        <div class="centered-content-header">
+            <h1 id="header-h1">BEST WORK</h1>
+            <div class="header-controls">
+                <div class="lang-switch">
+                    <button id="lang-ko" onclick="setLanguage('ko')" class="active">KOR</button>
+                    <button id="lang-en" onclick="setLanguage('en')">ENG</button>
+                </div>
             </div>
         </div>
     </header>
 
     <section id="home">
-        <h2 id="section-home-h2">BEST WORK</h2>
-        
-        <div class="main-nav-inline" id="main-nav-wrapper-inline">
+        <div class="centered-content-area">
+            <h2 id="section-home-h2">BEST WORK</h2>
+            
+            <div class="main-nav-inline" id="main-nav-wrapper-inline">
             </div>
 
-        <div class="section-content">
-            <p id="home-intro"></p>
+            <div class="section-content">
+                <p id="home-intro"></p>
+            </div>
         </div>
     </section>
 
     <section id="about">
-        <h2 id="section-about-h2">회사소개</h2>
-        
-        <p style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
-            <img src="https://github.com/BEST-WORK/BESTWORK/blob/main/Resized_20250308_150855_1741415133899.JPG?raw=true" alt="BEST WORK Office and People" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        </p>
-
-        <p id="about-core-values-intro" style="text-align: center; margin-top: 20px;">
-        </p>
-        
-        <div class="card-container">
+        <div class="centered-content-area">
+            <h2 id="section-about-h2">회사소개</h2>
             
-            <div class="info-card">
-                <h3 class="card-title" id="about-vision-title">
-                    <i class="fas fa-eye"></i> VISION
-                </h3>
-                <p id="about-vision"></p>
-            </div>
+            <p style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <img src="https://github.com/BEST-WORK/BESTWORK/blob/main/Resized_20250308_150855_1741415133899.JPG?raw=true" alt="BEST WORK Office and People" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </p>
 
-            <div class="info-card">
-                <h3 class="card-title" id="about-mission-title">
-                    <i class="fas fa-bullseye"></i> MISSION
-                </h3>
-                <p id="about-mission"></p>
-            </div>
+            <p id="about-core-values-intro" style="text-align: center; margin-top: 20px;">
+            </p>
+            
+            <div class="card-container">
+                
+                <div class="info-card">
+                    <h3 class="card-title" id="about-vision-title">
+                        <i class="fas fa-eye"></i> VISION
+                    </h3>
+                    <p id="about-vision"></p>
+                </div>
 
-            <div class="info-card">
-                <h3 class="card-title" id="about-business-title">
-                    <i class="fas fa-handshake"></i> 주요 사업
-                </h3>
-                <ul class="no-bullet-list" id="about-business-list"></ul>
+                <div class="info-card">
+                    <h3 class="card-title" id="about-mission-title">
+                        <i class="fas fa-bullseye"></i> MISSION
+                    </h3>
+                    <p id="about-mission"></p>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="card-title" id="about-business-title">
+                        <i class="fas fa-handshake"></i> 주요 사업
+                    </h3>
+                    <ul class="no-bullet-list" id="about-business-list"></ul>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="services">
-        <h2 id="section-services-h2">서비스 (What We Do?)</h2>
-        <div class="section-content">
-            
-            <p id="service-consulting-title" class="item-title"></p>
-            <p id="service-consulting-content"></p>
-            
-            <p id="service-visa-title" class="item-title"></p>
-            <p id="service-visa-content"></p>
+        <div class="centered-content-area">
+            <h2 id="section-services-h2">서비스 (What We Do?)</h2>
+            <div class="section-content">
+                
+                <p id="service-consulting-title" class="item-title"></p>
+                <p id="service-consulting-content"></p>
+                
+                <p id="service-visa-title" class="item-title"></p>
+                <p id="service-visa-content"></p>
 
-            <p id="service-job-title" class="item-title"></p>
-            <p id="service-job-content"></p>
-            
+                <p id="service-job-title" class="item-title"></p>
+                <p id="service-job-content"></p>
+                
+            </div>
         </div>
     </section>
     <section id="countries">
-        <h2 id="section-countries-h2">주요 국가 🌍</h2>
-        <div class="section-content">
-            <p id="countries-intro"></p>
-            <div class="country-grid" id="countries-grid">
+        <div class="centered-content-area">
+            <h2 id="section-countries-h2">주요 국가 🌍</h2>
+            <div class="section-content">
+                <p id="countries-intro"></p>
+                <div class="country-grid" id="countries-grid">
+                </div>
             </div>
         </div>
     </section>
@@ -540,64 +572,66 @@
             </div>
         </div>
         
-        <div class="university-content-container">
+        <div class="university-content-container centered-content-area">
             <div class="university-grid" id="universities-grid">
                 </div>
         </div>
     </section>
     
     <section id="contact">
-        <h2 id="section-contact-h2">Contact</h2>
-        <div class="section-content contact-info">
-            <p id="contact-email"></p>
-            <p id="contact-address"></p>
+        <div class="centered-content-area">
+            <h2 id="section-contact-h2">Contact</h2>
+            <div class="section-content contact-info">
+                <p id="contact-email"></p>
+                <p id="contact-address"></p>
 
-            <div style="margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px;">
-                <h3 id="modal-title" style="color: #004d99; border-bottom: 2px solid #ff9900; padding-bottom: 5px; margin-top: 0; margin-bottom: 20px; text-align: center; font-size: 1.3em;">1:1 상담 신청</h3>
-                <form id="consultation-form">
-                    <div class="form-group">
-                        <label for="c-name" id="c-name-label">이름:</label>
-                        <input type="text" id="c-name" name="name" required placeholder="이름을 입력해주세요">
-                    </div>
-                    <div class="form-group">
-                        <label for="c-contact" id="c-contact-label">연락처:</label>
-                        <input type="tel" id="c-contact" name="contact" required placeholder="010-XXXX-XXXX">
-                    </div>
-                    <div class="form-group">
-                        <label for="c-email" id="c-email-label">이메일:</label>
-                        <input type="email" id="c-email" name="email" required placeholder="example@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="c-topic" id="c-topic-label">상담 분야:</label>
-                        <select id="c-topic" name="topic" required>
-                            <option value="" disabled selected>상담 분야를 선택해주세요</option>
-                            <option value="유학생_유치">유학생 유치</option>
-                            <option value="인력_공급">인력 공급 (E-7 비자)</option>
-                            <option value="비자_문의">비자 관련 문의 (D2, D4, F2 등)</option>
-                            <option value="기타">기타 문의</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="c-content" id="c-content-label">상세 내용:</label>
-                        <textarea id="c-content" name="content" rows="4" required placeholder="상담 내용을 자세히 적어주세요"></textarea>
-                    </div>
-                    <button type="submit" id="c-submit-btn">상담 신청 완료</button>
-                </form>
-                <p id="c-note" style="font-size: 0.8em; color: #777; margin-top: 10px; text-align: center;">신청해주시면 빠르게 연락드리겠습니다.</p>
-            </div>
+                <div style="margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px;">
+                    <h3 id="modal-title" style="color: #004d99; border-bottom: 2px solid #ff9900; padding-bottom: 5px; margin-top: 0; margin-bottom: 20px; text-align: center; font-size: 1.3em;">1:1 상담 신청</h3>
+                    <form id="consultation-form">
+                        <div class="form-group">
+                            <label for="c-name" id="c-name-label">이름:</label>
+                            <input type="text" id="c-name" name="name" required placeholder="이름을 입력해주세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-contact" id="c-contact-label">연락처:</label>
+                            <input type="tel" id="c-contact" name="contact" required placeholder="010-XXXX-XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-email" id="c-email-label">이메일:</label>
+                            <input type="email" id="c-email" name="email" required placeholder="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-topic" id="c-topic-label">상담 분야:</label>
+                            <select id="c-topic" name="topic" required>
+                                <option value="" disabled selected>상담 분야를 선택해주세요</option>
+                                <option value="유학생_유치">유학생 유치</option>
+                                <option value="인력_공급">인력 공급 (E-7 비자)</option>
+                                <option value="비자_문의">비자 관련 문의 (D2, D4, F2 등)</option>
+                                <option value="기타">기타 문의</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-content" id="c-content-label">상세 내용:</label>
+                            <textarea id="c-content" name="content" rows="4" required placeholder="상담 내용을 자세히 적어주세요"></textarea>
+                        </div>
+                        <button type="submit" id="c-submit-btn">상담 신청 완료</button>
+                    </form>
+                    <p id="c-note" style="font-size: 0.8em; color: #777; margin-top: 10px; text-align: center;">신청해주시면 빠르게 연락드리겠습니다.</p>
+                </div>
 
-            <div class="social-links">
-                <a href="https://www.facebook.com/best.work.365125/" target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
-                <a href="https://www.instagram.com/best_work_korea/" target="_blank" title="Instagram"><i class="fab fa-instagram-square"></i></a>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/best.work.365125/" target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/best_work_korea/" target="_blank" title="Instagram"><i class="fab fa-instagram-square"></i></a>
+                </div>
             </div>
         </div>
     </section>
     
     <footer>
-        <p id="footer-text">&copy; 2025 BEST WORK All rights reserved.</p>
+        <div class="centered-content-area">
+            <p id="footer-text">&copy; 2025 BEST WORK All rights reserved.</p>
+        </div>
     </footer>
-
-</div>
 
 <script>
     // --- 1. 언어별 콘텐츠 데이터 (메뉴 항목 키/ID를 포함) ---
@@ -823,7 +857,6 @@
         document.getElementById('about-business-title').childNodes[1].nodeValue = ` ${data['about-business-title']}`;
 
         // 서비스 섹션 업데이트 (3개 항목)
-        // 카드 없이 텍스트만 로드
         document.getElementById('service-consulting-title').textContent = data['service-consulting-title'];
         document.getElementById('service-consulting-content').innerHTML = data['service-consulting-content'];
         document.getElementById('service-visa-title').textContent = data['service-visa-title'];
