@@ -222,7 +222,7 @@
         .country-card p { font-size: 0.95em; color: #333; margin: 0; text-align: left; }
         
         /* ---------------------------------------------------- */
-        /* 5. 제휴 대학 섹션 디자인 (모바일 - 롤링 배너) */
+        /* 5. 제휴 대학 섹션 디자인 (모바일 - 롤링 배너 재추가) */
         /* ---------------------------------------------------- */
         #universities { background-color: #f8f8f8; padding: 0; }
         #universities h2 {
@@ -285,6 +285,11 @@
             border-radius: 5px;
         }
 
+        .university-content-container {
+             /* 캐러셀이 H2 다음에 오도록 패딩 조정 */
+            padding-top: 0;
+        }
+        
         .university-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 모바일에서 최소 280px 간격으로 1~2열 */
@@ -460,6 +465,7 @@
         </div>
         
         <div class="university-content-container centered-content-area">
+            
             <div class="university-grid" id="universities-grid">
                 </div>
         </div>
@@ -712,7 +718,7 @@
     };
 
     let currentLang = 'ko';
-    let slideIndex = 0;
+    let slideIndex = 0; // 캐러셀 인덱스 추가
 
     // --- 2. 콘텐츠 로드 함수 ---
     function loadContent(lang) {
@@ -753,10 +759,11 @@
 
         document.getElementById('countries-intro').textContent = data['countries-intro'];
         
-        // 캐러셀 오버레이 텍스트 설정
-        document.getElementById('universities-intro-1').textContent = data['universities-intro'];
-        document.getElementById('universities-intro-2').textContent = data['universities-intro'];
-        document.getElementById('universities-intro-3').textContent = data['universities-intro'];
+        // 캐러셀 오버레이 텍스트 설정 (세 개의 요소에 모두 설정)
+        const universitiesIntroText = data['universities-intro'];
+        document.getElementById('universities-intro-1').textContent = universitiesIntroText;
+        document.getElementById('universities-intro-2').textContent = universitiesIntroText;
+        document.getElementById('universities-intro-3').textContent = universitiesIntroText;
 
         document.getElementById('contact-email').innerHTML = data['contact-email'];
         document.getElementById('contact-address').innerHTML = data['contact-address']; 
@@ -857,6 +864,9 @@
     // --- 4. 캐러셀 제어 함수 ---
     function showSlides() {
         const slides = document.getElementsByClassName("university-carousel-item");
+        // 슬라이드가 없으면 실행 중지 (안전 장치)
+        if (slides.length === 0) return; 
+        
         for (let i = 0; i < slides.length; i++) {
             slides[i].classList.remove('active');
         }
@@ -865,6 +875,7 @@
         slides[slideIndex-1].classList.add('active');
         setTimeout(showSlides, 5000); // 5초마다 이미지 변경
     }
+
 
     // --- 5. 초기화 및 자동 감지 ---
     document.addEventListener('DOMContentLoaded', () => {
